@@ -10,7 +10,8 @@
 
 int main()
 {
-
+    
+	int stat = 0;
 
     while (20) {
 	char *buf = NULL;
@@ -74,19 +75,22 @@ int main()
 		exit(-1);
 	    }
 	    printf("\n");
+		stat = 0;
 
 	} else if (strcmp(words, "exit") == 0 && has_extra_args == 0) {
 	    printf("Good Bye ;)\n");
 	    return 0;
 	} else if (strcmp(words, "pwd") == 0 && has_extra_args == 0) {
 	    pwd();
+		stat = 0;
 	} else if (strcmp(words, "cd") == 0) {
 	    if (chdir(&(buf[firstword + 1])) < 0)
 		printf("cd FAILED\n");
+		stat = 1;
 	}
 
 	else {
-	    execute(buf);
+	    stat = execute(buf);
 	}
 
 	free(buf);
@@ -94,5 +98,5 @@ int main()
 
     }
 
-    return 0;
+    return stat;
 }
