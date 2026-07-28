@@ -10,13 +10,16 @@
 
 int main()
 {
-        char buf[100];
-	char words[20];
+    char buf[100000];
+	char words[100];
+	int stat = 0;
 
 	while(20) {
 	printf("ZUBA EL-SHAMLULA > ");
-	fgets(buf, 100, stdin);
- 
+	fflush(stdout);
+	if(fgets(buf, 100000, stdin)==NULL)
+		break;
+		
 	buf[strlen(buf) - 1] = 0;
 	if (strlen(buf) == 0)
 	    continue;
@@ -36,15 +39,17 @@ int main()
 	    exit(-1);
 	}
 	    printf("\n");
+		stat = 0;
 	
 	}
 	else if(strcmp(words, "exit") == 0) {
 		printf("Good Bye ;)\n");
 		return 0;
 	}
-	else 
-		printf("INVALID COMMAND\n");
-
+	else {
+		printf("Invalid command\n");
+		stat = 1;
 	}
-	return 0;
+	}
+	return stat;
 }
